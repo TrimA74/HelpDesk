@@ -1,0 +1,84 @@
+.error-ins {
+	position: absolute;
+	margin-top: 10px;
+	margin-left : 10px;
+}
+section {
+	margin-left: 15px;
+}
+
+/*css div login*/
+
+.Absolute-Center {
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+}
+
+.Absolute-Center.is-Responsive {
+  width: 50%; 
+  height: 200px;
+  min-width: 200px;
+  max-width: 400px;
+  padding-top : 40px;
+  padding-bottom : 40px;
+  border: solid 3px ;
+  border-color : #286090;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+#btn_login{
+	margin-right: auto;
+	margin-left: auto;
+}
+#login_div span:last-child{
+	margin-right: auto;
+	margin-left: auto;
+	position: relative;
+}
+.table-hover tbody tr:hover td{
+  background-color: orange;
+  opacity: 1;
+  transition-duration: 500ms;
+  color : #FFFFFF;
+  cursor : pointer;
+}
+.table-hover tbody tr td {
+  background-color: #FFFFFF;
+  opacity: 1;
+  transition-duration: 500ms;
+  cursor : pointer;
+}
+.span_ticket{
+  font-weight: bold;
+  margin-left : 10px;
+  width : 220px;
+  margin-right : 20px;
+  display : inline-block;
+}
+.urgFaible{
+  font-weight: bold;
+  color : #01E162;
+}
+.urgMoy{
+  font-weight: bold;
+  color : orange;
+}
+.urgHaute{
+  font-weight: bold;
+  color : #c60800;
+}
+
+.sortorder:after {
+  content: '\25b2';
+}
+.sortorder.reverse:after {
+  content: '\25bc';
+}
+
+.chart {
+ width: 500px;
+ height: 500px;
+}

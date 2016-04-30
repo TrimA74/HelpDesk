@@ -1,0 +1,24 @@
+<div class="container" id="login_div">
+	<div class="row">
+    <div class="Absolute-Center is-Responsive">
+      <div id="logo-container"></div>
+      <div class="col-sm-12 col-md-10 col-md-offset-1">
+			<form novalidate name="myform">
+				<div class="form-group input-group">
+					<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+					<input ng-model="user.login" class="form-control" placeholder="Login" required/>
+				</div>
+				<div class="form-group input-group">
+					<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>	
+					<input ng-model="user.mdp" class="form-control col-xs-2" placeholder="Password" type="password" required/>
+				</div>
+				<div id="btn_login" class="form-group input-group">
+					<input ng-disabled="myform.$invalid" type ="submit" value="connexion" ng-click="login()" class="btn btn-primary"/>
+				</div>
+				    <div ng-hide="error == 0" class="alert alert-danger">{{error}}</div>
+			</form>
+	  </div>
+	  </div>
+	</div>
+	</div>
+</div>

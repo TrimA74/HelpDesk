@@ -1,0 +1,262 @@
+<!--Pépito -->
+<h1 ng-init="init()">Mes Tickets</h1>
+
+<!-- Recherche de tickets -->
+
+<form role="form" ng-show="$root.isOpe || $root.isResp">
+	<div class="row">
+		<div class="form-group">
+			<legend>Rechercher un ticket</legend>
+		</div>
+		<div  class="form-group col-md-4">
+			<label class="control-label col-md-4">N° ticket:</label>
+			<input type="text" class="form-control col-md-2" ng-model="searchTicketNumber" value="">
+		</div>
+
+		<div class="form-group col-md-4">
+			<label class="control-label col-md-4">Statut:</label>
+			<select ng-model="searchTicketStatus" class="form-control col-md-4">
+				<option></option>
+				<option>Ouvert</option>
+				<option>Fermé</option>
+				<option>En cours</option>
+			</select>
+		</div>
+		<div class="form-group col-md-4">
+			<label class="control-label col-md-4">Etat:</label>
+			<select ng-model="searchStateEtat" class="form-control col-md-4">
+				<option></option>
+				<option>Resolu</option>
+				<option>Irresolu</option>
+			</select>
+		</div>
+		<div class="form-group col-md-4">
+			<label class="control-label col-md-5">Nom d'utilisateur: </label>
+			<input type="text"  class="form-control col-md-5" ng-model="searchUserName" value="">
+		</div>
+		<div class="form-group col-md-4">
+			<label class="control-label col-md-4">Priorité: </label>
+			<select ng-model="searchTicketPriority" class="form-control">
+				<option></option>
+				<option>Faible</option>
+				<option>Moyenne</option>
+				<option>Haute</option>
+			</select>
+		</div>
+		<div class="form-group col-md-4" >
+			<label class="control-label">Date de résolution prévue : </label>
+			<div class='input-group date' id="dateTicket">
+				<input type='text' class="form-control" ng-model="dateSearch" />
+	                <span class="input-group-addon">
+	                    <span class="glyphicon glyphicon-calendar"></span>
+	                </span>
+			</div>
+		</div>
+		<div class="form-group col-md-4">
+			<label class="control-label col-md-4">Type: </label>
+			<select ng-model="searchTicketType" class="form-control col-md-4">
+				<option></option>
+				<option>Logiciel</option>
+				<option>Materiel</option>
+			</select>
+		</div>
+		<div class="form-group col-md-7 ">
+			<button type="submit" ng-model="searchTicketButton " class="btn btn-primary pull-right" ng-click="searchTicket()">Rechercher</button>
+		</div>
+<!--
+		<div class='input-group date' id='datetimepicker1'>
+            <input type='text' class="form-control" />
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar" ng-model="dtPick"></span>
+            </span>
+        </div>
+-->
+	</div>
+ </form>
+
+ 
+
+<!--Visualisation des tickets-->
+
+<!-- Display Client -->
+<hr>
+ <div  ng-show="$root.isClient" class="table-responsive">
+  <table class="table table-hover">
+    <thead>    
+       <th ng-click="order('id_ticket')"><span class="sortorder"  ng-class="{reverse:reverse}"></span>N°Ticket</th>
+          
+       <th>Etat</th>
+       <th>Statut</th>
+       <th>Urgence</th>
+       <th>Type</th>
+       <th>Qualification</th>
+       <th>Description</th>
+       <th>Date Résolution prévue</th>
+       <th>Pièce jointe</th>
+       </hr>
+   </thead>
+   <tbody>
+	   <tr  ng-repeat="iterCliTicket in tickets  | orderBy:predicate:reverse track by $index" ng-click="redirectOnTicket(iterCliTicket.id_ticket)">
+				<td>
+					{{iterCliTicket.id_ticket}}
+				</td>
+				 <td>
+					{{iterCliTicket.libelle_etat}}
+				</td>
+				<td>
+					{{iterCliTicket.statut_ticket}}
+				</td>
+				<td ng-class="{'urgFaible': iterCliTicket.urgence == 'Faible',
+			                   'urgMoy': iterCliTicket.urgence == 'Moyenne',
+			                   'urgHaute': iterCliTicket.urgence == 'Haute'}">
+					{{iterCliTicket.urgence}}
+				</td>
+				<td>
+					{{iterCliTicket.pb}}
+				</td>
+				<td>
+					{{iterCliTicket.specialite}}
+				</td>
+				<td>
+					{{iterCliTicket.description}}
+				</td> 
+				<td>
+					{{iterCliTicket.date_rez_prevue}}
+				</td> 
+				<td>
+					{{iterCliTicket.piece_jointe}}
+				</td> 
+	    </tr>
+    </tbody>
+  </table>
+</div> 
+
+<!-- Display Opérateur -->
+<div ng-show="$root.isOpe" class="table-responsive">
+  <table class="table table-hover">
+    <thead>  
+       <th>Numéro du ticket</th> 
+       <th>Nom du demandeur</th>
+       <th>Etat</th>
+       <th>Statut</th>
+       <th>Urgence</th>
+       <th>Type</th>
+       <th>Qualification</th>
+       <th>Description ticket</th>
+       <th>Date résolution prévue</th>
+       <th>Pièce jointe</th> 
+   </thead>
+   <tbody>
+   <tr ng-repeat="iterOpeTicket in tickets track by $index" ng-click="redirectOnTicket(iterOpeTicket.id_ticket)" >
+		<td>
+			{{iterOpeTicket.id_ticket}}
+		</td>
+		<td>
+			{{iterOpeTicket.nom_client}}
+		</td> 
+		<td>
+			{{iterOpeTicket.libelle_etat}}
+		</td>
+		<td>
+			{{iterOpeTicket.statut_ticket}}
+		</td>
+		<td ng-class="{'urgFaible': iterOpeTicket.urgence == 'Faible',
+			                   'urgMoy': iterOpeTicket.urgence == 'Moyenne',
+			                   'urgHaute': iterOpeTicket.urgence == 'Haute'}">
+			{{iterOpeTicket.urgence}}
+		</td>
+		<td>
+			{{iterOpeTicket.pb}}
+		</td>
+		<td>
+			{{iterOpeTicket.specialite}}
+		</td>
+		<td>
+			{{iterOpeTicket.description}}
+		</td>
+		<td>
+			{{iterOpeTicket.date_rez_prevue}}
+		</td> 
+		<td>
+			{{iterOpeTicket.piece_jointe}}
+		</td>  
+	</tr>
+	</tbody>
+  </table>
+</div> 
+
+<!-- Display Responsable -->
+<div ng-show="$root.isResp" class="table-responsive">
+  <table class="table table-hover">
+  	<thead>  
+    <tr>
+       <th ng-click="order('id')">
+       	<span class="sortorder" ng-show="predicate === 'id'" ng-class="{reverse:reverse}"></span>Numéro du ticket</th>
+       <th ng-click="order('nom')">
+       		<span class="sortorder" ng-show="predicate === 'nom'" ng-class="{reverse:reverse}"></span>Nom du demandeur</th>
+       <th>Nom de l'opérateur</th>
+       <th>Etat</th>
+       <th>Statut</th>
+       <th>Urgence</th>
+       <th>Type</th>
+       <th>Qualification</th>
+       <th>Description ticket</th>
+       <th>Date résolution prévue</th>
+       <th>Pièce jointe</th> 
+	</tr>
+	</thead>
+	<tbody>
+   	<tr ng-repeat="iterResTicket in tickets | orderBy:predicate:reverse track by $index " ng-click="redirectOnTicket(iterResTicket.id_ticket)">
+		<td>
+			{{iterResTicket.id_ticket}}
+		</td>
+		<td>
+			{{iterResTicket.nom_client}}
+		</td>
+		<td>
+			{{iterResTicket.nom_ope}}
+		</td>
+		<td>
+			{{iterResTicket.libelle_etat}}
+		</td>
+		<td>
+			{{iterResTicket.statut_ticket}}
+		</td>
+		<td ng-class="{'urgFaible': iterResTicket.urgence == 'Faible',
+			                   'urgMoy': iterResTicket.urgence == 'Moyenne',
+			                   'urgHaute': iterResTicket.urgence == 'Haute'}">
+			{{iterResTicket.urgence}}
+		</td>
+		<td  >
+			{{iterResTicket.pb}}
+		</td>
+		<td>
+			{{iterResTicket.specialite}}
+		</td>
+		<td>
+			{{iterResTicket.description}}
+		</td>
+		<td>
+			{{iterResTicket.date_rez_prevue}}
+		</td> 
+		<td>
+			{{iterResTicket.piece_jointe}}
+		</td>
+	</tr>
+	</tbody>
+  </table>
+</div> 
+
+<script type="text/javascript">
+            $(function () {
+                $('#dateTicket').datepicker({
+            		trueodayBtn:"true",
+					format:"dd-mm-yy", 
+					autoclose:"true",
+					pickerPosition:"bottom-left",
+					startView:"year",
+					minView:"month",
+					language:"fr"
+                });
+            });
+</script>

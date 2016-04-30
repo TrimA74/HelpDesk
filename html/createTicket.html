@@ -1,0 +1,58 @@
+<!-- Anthony -->
+
+<h1>Formulaire de création de ticket</h1>
+<p>Les champs munis d'une * sont obligatoires</p>
+<form ng-init="findSpecialites()" novalidate class="form-horizontal" role="form" name="createTicketForm">
+	<div class="form-group">
+		<label class="control-label col-sm-2" for="emergencyStatus">Urgence du problème :*</label>
+		<div class="col-sm-2">
+			<select ng-model="emergencyStatus" class="form-control" name="emergencyStatus" required>
+				<option value="41">Faible</option>
+				<option value="42">Moyenne</option>
+				<option value="43">Haute</option>
+			</select>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-sm-2" for="computerNumber">Poste concerné :*</label>
+		<div class="col-sm-1">
+			 <input ng-model="computerNumber" type="text" class="form-control" name="computerNumber" required></input>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-sm-2" for="issueType">Type de problème :*</label>
+		<div class="col-sm-2">
+			<select ng-change="findSpecialites()" ng-model="issueType" class="form-control" name="issueType" required>
+				<option value="materiel">Hardware (matériel)</option>
+				<option value="logiciel">Software (logiciel)</option>
+			</select>
+		</div>
+		<label class="control-label col-sm-2" for="issueTypeSpecification">Précisez l'élément concerné :*</label>
+		<div class="col-sm-2">
+			<select ng-options="spe as spe.nom_specialite for spe in specialites track by spe.id_specialite" ng-model="issueTypeSpecification" class="form-control" name="issueTypeSpecification" required>
+			</select>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-sm-2" for="ticketDescription">Description du ticket :*</label>
+		<div class="col-sm-2">
+			 <textarea ng-model="ticketDescription" class="form-control" rows="5" name="ticketDescription" required></textarea>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label col-sm-2" for="uploadFileTicketInput">Pièce jointe :</label>
+		<div class="col-sm-2">
+	  	    <input type="text" name="username" ng-model="username"/>
+	  	    <input ng-model="uploadFileTicketInput" type="file" id="uploadFileTicket" name="uploadFileTicketInput" ngf-select="uploadFiles($file, $invalidFiles)"
+          accept="image/*" ngf-max-height="1000" ngf-max-size="1MB"></input>
+		</div>
+		<div class="col-sm-1">
+	  	    <button class="btn btn-default" ng-click="uploadPic(picFile)" name="uploadFileTicketButton">Importer</button>
+		</div>
+	  </div>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<button ng-disabled="createTicketForm.$invalid" type="submit" class="btn btn-primary" ng-click="createTicket()">Créer le ticket</button>
+		</div>
+	</div>
+</form>

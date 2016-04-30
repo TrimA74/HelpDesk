@@ -1,0 +1,84 @@
+<h1 ng-init="init()">Ticket N°{{id}}</h1>
+<hr/>
+
+<div  class="container row ">
+	<h3>Demandeur</h3>
+		<div><span class="span_ticket">Nom : </span>{{nom_cli}}</div>
+		<div><span class="span_ticket">Prénom : </span>{{pren_cli}}</div>
+	<h3>Ticket</h3>
+		<div><span class="span_ticket">Poste : </span>{{lib_pos}}</div>
+		<div><span class="span_ticket">Problème : </span>{{lib_prob}}</div>	
+	    <div><span class="span_ticket">Description : </span>{{des_tick}}</div>
+		<div><span class="span_ticket">Statut : </span>{{statut_tick}}</div>
+		<div><span class="span_ticket">Etat : </span>{{libelle_etat}}</div>
+		<div><span class="span_ticket">Date résolution prévue : </span>{{date_rez}}</div>
+		
+	<h3>Interventions</h3>
+
+	<div  ng-show="$root.isClient" class="table-responsive">
+	 <table class="table table-hover">
+	   <thead>    
+	       <th>N°Intervention</th>
+	       <th>Prénom Opérateur</th>
+	       <th>Nom Opérateur</th>
+	       <th>Date d'intervention</th>
+	       <th>Statut de l'intervention</th>
+	       <th>Commentaire</th>
+	       </hr>
+	  </thead>
+	  <tbody>
+	   <tr ng-show="$root.isClient" ng-repeat="iterIntervention in interventions track by $index">
+				<td>
+					{{iterIntervention.id_intervention}}
+				</td>
+				 <td>
+					{{iterIntervention.nom_emp}}
+				</td>
+				<td>
+					{{iterIntervention.prenom_emp}}
+				</td>
+				<td>
+					{{iterIntervention.date_interv}}
+				</td>
+				<td>
+					{{iterIntervention.libelle_int}}
+				</td>
+				<td>
+					{{iterIntervention.com_inter}}
+				</td> 
+	    </tr>
+   		</tbody>
+	  </table>
+	</div> 
+
+	<div  ng-show="$root.isOpe || $root.isResp" class="table-responsive">
+	 <table class="table table-hover">
+	   <thead>    
+	       <th>N°Intervention</th>
+	       <th>Date d'intervention</th>
+	       <th>Statut de l'intervention</th>
+	       <th>Commentaire</th>
+	       </hr>
+	  </thead>
+	  <tbody>
+	   <tr ng-show="$root.isClient" ng-repeat="iterIntervention in interventions track by $index">
+				<td>
+					{{iterIntervention.id_intervention}}
+				</td>
+				<td>
+					{{iterIntervention.date_interv}}
+				</td>
+				<td>
+					{{iterIntervention.libelle_int}}
+				</td>
+				<td>
+					{{iterIntervention.com_inter}}
+				</td> 
+	    </tr>
+   		</tbody>
+	  </table>
+	</div> 
+
+	 <button ng-show="$root.isOpe || $root.isResp" class="btn btn-primary" ng-click="redirectOnIntervention(id)">Prévoir une intervention</button>
+</div>
+

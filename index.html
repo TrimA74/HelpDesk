@@ -1,0 +1,89 @@
+<!-- Pépito -->
+<!DOCTYPE html> 
+<html ng-app="helpdesk">
+<head>
+<meta charset="UTF-8">
+<title>Helpdesk</title>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />	
+<link rel="stylesheet" type="text/css" href="css/bootstrap-datepicker3.css" />
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+</head>
+<body>
+	<main ng-controller="mainController">
+		<!-- tout ce qui est déclarer dans le scope est visible ici
+	    <input ng-model="user">-->
+
+<nav ng-show="$root.isLogged" class="navbar navbar-inverse">
+	<div class="container-fluid">
+	<div class="navbar-header">
+    
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	<ul ng-show="$root.isLogged" class="nav navbar-nav">
+		<a href="#/home" class="navbar-brand">HelpDesk</a>
+    <li  ng-show="$root.isClient" class="active"><a href="#/createTicket">Creer un ticket</a></li>
+		<li  class="active"><a href="#/displayTickets">Mes tickets</a></li>
+    <li class="active" ng-hide="$root.isClient"><a href="#/displayInterventions">Mes Interventions</a></li>
+    <li  ng-show="$root.isResp" class="active"><a href="#/redirectionTicket">Redirection des Tickets</a></li>
+     <li  ng-show="$root.isResp" class="active"><a href="#/stats">Statistiques</a></li>
+	</ul>
+	 <ul class="nav navbar-nav navbar-right">
+      	 <li ng-show="$root.isLogged">
+      	<a>
+      		<span><i class="glyphicon glyphicon-user"></i>
+      		</span> Bonjour  {{ $root.user.prenom}} {{$root.user.nom}}
+      	</a>
+      	</li>
+      	<li ng-show="$root.isLogged">
+      	<a href="#/login">
+      		<span ng-click="logout()" class="glyphicon glyphicon-log-in">
+      		</span> Déconnexion
+      	</a>
+      	</li>
+    </ul>
+	 </div>
+	</div>
+</nav>
+
+
+ <section ng-view>
+
+ </section>
+
+
+<!-- ng- => directives-->
+	</main>
+<script type="text/javascript" src="lib/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="lib/angular.js"></script>
+<script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="lib/angular-charts.min" charset="utf-8"></script>
+<script type="text/javascript" src="lib/angular-route.min.js"></script>
+<script type="text/javascript" src="lib/angular-cookie.js"></script>
+<script src="lib/ng-file-upload-bower-12.0.4/ng-file-upload-shim.min.js"></script> 
+<script src="lib/ng-file-upload-bower-12.0.4/ng-file-upload.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<script type="text/javascript" src="lib/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="lib/bootstrap-datepicker.fr.min.js"></script>
+<script type="text/javascript" src="main.js"></script>
+<script type="text/javascript" src="controller/homeController.js"></script>
+<script type="text/javascript" src="controller/clientsController.js"></script>
+<script type="text/javascript" src="controller/loginController.js"></script>
+<script type="text/javascript" src="controller/ticketController.js"></script>
+<script type="text/javascript" src="controller/displayTicketsController.js"></script>
+<script type="text/javascript" src="controller/displayInterventionsController.js"></script>
+<script type="text/javascript" src="controller/createTicketController.js"></script>
+<script type="text/javascript" src="controller/searchTicketController.js"></script>
+<script type="text/javascript" src="controller/redirectionTicketController.js"></script>
+<script type="text/javascript" src="controller/ticketController.js"></script>
+<script type="text/javascript" src="controller/createInterventionController.js"></script>
+<script type="text/javascript" src="controller/testController.js"></script>
+<script type="text/javascript" src="controller/statsController.js"></script>
+
+</body>
+</html>

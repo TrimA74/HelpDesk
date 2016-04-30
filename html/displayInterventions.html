@@ -1,0 +1,100 @@
+<h1 ng-init="init()">Mes interventions</h1>
+
+
+<form role="form" ng-show="$root.isOpe || $root.isResp">
+	<div class="row">
+		<div class="form-group">
+			<legend>Rechercher un ticket</legend>
+		</div>
+		<div  class="form-group col-md-4">
+			<label class="control-label col-md-4">N° intervention:</label>
+			<input type="text" class="form-control col-md-2" ng-model="searchInterventionNumber" value="">
+		</div>
+		<div  class="form-group col-md-4">
+			<label class="control-label col-md-4">N° ticket:</label>
+			<input type="text" class="form-control col-md-2" ng-model="searchTickeNumber" value="">
+		</div>
+
+		<div class="form-group col-md-4">
+			<label class="control-label col-md-4">Statut:</label>
+			<select ng-model="searchTicketStatus" class="form-control col-md-4">
+				<option></option>
+				<option>Ouvert</option>
+				<option>Fermé</option>
+				<option>En cours</option>
+			</select>
+		</div>
+		<div class="form-group col-md-4">
+			<label class="control-label ">Nom du demandeur: </label>
+			<input type="text"  class="form-control col-md-4" ng-model="searchUserName" value="">
+		</div>
+		<div class="form-group col-md-4">
+			<div>
+				<label class="control-label">Date de la dernière intervention: </label>
+				<div class='input-group date ' id="dateTicket">
+					<input type='text' class="form-control" ng-model="dateSearch" />
+		                <span class="input-group-addon">
+		                    <span class="glyphicon glyphicon-calendar"></span>
+		                </span>
+				</div>
+			</div>
+		</div>
+		<div class="form-group col-md-3">
+			<button type="submit" ng-model="searchTicketButton" class="btn btn-primary pull-right" ng-click="searchIntervention()">Rechercher</button>
+		</div>
+	</div>
+ </form>
+
+
+
+
+<div class="table-responsive">
+	 <table class="table table-hover">
+	   <thead>    
+	       <th>N°Intervention</th>
+	       <th>N°Ticket</th>
+	       <th>Nom Demandeur</th>
+	       <th>Date d'intervention</th>
+	       <th>Statut de l'intervention</th>
+	       <th>Commentaire</th>
+	       </hr>
+	  </thead>
+	  <tbody>
+	   <tr  ng-repeat="iterIntervention in interventions track by $index" ng-click="redirectOnIntervention(iterIntervention.id_ticket)">
+				<td>
+					{{iterIntervention.id_intervention}}
+				</td>
+				<td>
+					{{iterIntervention.id_ticket}}
+				</td>
+				<td>
+					{{iterIntervention.nom_client}}
+				</td>
+				<td>
+					{{iterIntervention.date_interv}}
+				</td>
+				<td>
+					{{iterIntervention.libelle_int}}
+				</td>
+				<td>
+					{{iterIntervention.com_inter}}
+				</td> 
+	    </tr>
+   		</tbody>
+	 </table>
+</div> 
+
+
+<script type="text/javascript">
+            $(function () {
+                $('#dateTicket').datepicker({
+            		trueodayBtn:"true",
+					format:"dd-mm-yy", 
+					autoclose:"true",
+					pickerPosition:"bottom-left",
+					startView:"year",
+					minView:"month",
+					language:"fr"
+                });
+            });
+</script>

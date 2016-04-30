@@ -1,0 +1,56 @@
+<!-- Pépito -->
+<form class="form-horizontal col-lg-6">
+	<div class="row">
+		<div class="form-group row">
+			<legend>Rechercher un ticket</legend>
+		</div>
+		<div  class="form-group row">
+			<label >Numéro de ticket: </label>
+			<input type="text"  class="form-control" name="searchTicketNumber" value="">
+		</div>
+
+		<div class="form-group row">
+			<label>Statut: </label>
+			<select name="searchTicketStatus" class="form-control">
+				<option>Ouvert</option>
+				<option>Fermé</option>
+			</select>
+		</div>
+		<div class="form-group row">
+			<label>Etat: </label>
+			<select name="searchStateStatus" class="form-control">
+				<option>Résolu</option>
+				<option>Irrésolut</option>
+			</select>
+		</div>
+		<div class="form-group row">
+			<label>Nom d'utilisateur: </label>
+			<input type="text"  class="form-control" name="searchUserName" value="">
+		</div>
+		<div class="form-group row">
+			<label>Priorité: </label>
+			<select name="searchTicketPriority" class="form-control">
+				<option>Faible</option>
+				<option>Moyenne</option>
+				<option>Forte</option>
+			</select>
+		</div>
+		<div class="form-group row">
+			<label>Date: </label>
+			<input type="text"  class="form-control" name="searchTicketDate" value="">
+			</div>
+		<div class="form-group row">
+			<label>Type: </label>
+			<select name="searchTicketType" class="form-control">
+				<option>Logiciel</option>
+				<option>Matériel</option>
+			</select>
+		</div>
+		<div class="form-group row">
+			<button type="submit" name="searchTicketButton" class="btn btn-primary" ng-click="searchTicket()">Rechercher</button>
+		</div>
+	</div>
+ </form>
+
+<!-- <script type="text/javascript" src="js/client.js"></script> -->
+
